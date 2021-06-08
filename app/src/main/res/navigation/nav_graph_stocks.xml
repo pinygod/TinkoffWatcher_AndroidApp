@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/stocksListFragment">
+
+    <fragment
+        android:id="@+id/stocksListFragment"
+        android:name="com.example.tinkoffwatcher.ui.stocks.StocksListFragment"
+        android:label="fragment_stocks_list"
+        tools:layout="@layout/fragment_stocks_list" >
+        <action
+            android:id="@+id/action_stocksListFragment_to_stockSettingsFragment"
+            app:destination="@id/stockSettingsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockSettingsFragment"
+        android:name="com.example.tinkoffwatcher.ui.stocks.StockSettingsFragment"
+        android:label="fragment_stock_settings"
+        tools:layout="@layout/fragment_stock_settings" >
+        <argument
+            android:name="stock"
+            app:argType="com.example.tinkoffwatcher.data.Stock" />
+    </fragment>
+</navigation>

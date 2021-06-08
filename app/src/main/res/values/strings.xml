@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TinkoffWatcher</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="stock_count">%s pcs.</string>
+    <string name="stock_average_price">%1$s %2$s</string>
+    <string name="stock_price">%1$s %2$s\n(%3$.2f %%)</string>
+    <string name="trail_stop_activation_price_text">Trail stop activation price:</string>
+    <string name="stop_loss_text">Stop loss %:</string>
+    <string name="enable_trail_stop_text">Enable trail stop?</string>
+    <string name="logout">Logout</string>
+</resources>
