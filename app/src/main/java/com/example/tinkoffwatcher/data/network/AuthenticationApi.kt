@@ -1,4 +1,4 @@
-package com.example.tinkoffwatcher.network
+package com.example.tinkoffwatcher.data.network
 
 import com.example.tinkoffwatcher.data.LoginModel
 import com.example.tinkoffwatcher.data.LoginResponse

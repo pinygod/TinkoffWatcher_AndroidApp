@@ -2,7 +2,6 @@ package com.example.tinkoffwatcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tinkoffwatcher.network.AuthorizationHeaderInterceptor
 import com.example.tinkoffwatcher.utils.DataStore
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect

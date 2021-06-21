@@ -1,4 +1,4 @@
-package com.example.tinkoffwatcher.network
+package com.example.tinkoffwatcher.data.network
 
 import com.example.tinkoffwatcher.data.Stock
 import com.example.tinkoffwatcher.data.StockEditSettingsModel

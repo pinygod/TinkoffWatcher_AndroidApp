@@ -2,8 +2,10 @@ package com.example.tinkoffwatcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tinkoffwatcher.data.SellOption
 import com.example.tinkoffwatcher.data.Stock
-import com.example.tinkoffwatcher.data.StocksRepository
+import com.example.tinkoffwatcher.data.StockSettingsObserveModel
+import com.example.tinkoffwatcher.data.repository.StocksRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -14,9 +16,11 @@ class StockSettingsViewModel(private val stocksRepository: StocksRepository) : V
     private val _trailStopPrice = MutableStateFlow(0.0)
     private val _stopLossPercent = MutableStateFlow(0.0)
     val trailStopEnabled = MutableStateFlow(false)
+    val sellOption = MutableStateFlow(SellOption.Limit)
 
     fun setStock(stock: Stock) {
         trailStopEnabled.value = stock.isTrailStopEnabledByUser
+        sellOption.value = stock.sellOption
         _trailStopPrice.value = stock.takeProfitPrice
         _stopLossPercent.value = stock.stopLossPercent
         _stock = stock
@@ -46,30 +50,38 @@ class StockSettingsViewModel(private val stocksRepository: StocksRepository) : V
         }
     }
 
+    fun onSellOptionChanged(sellOption: SellOption) {
+        if (sellOption != this.sellOption.value) {
+            this.sellOption.value = sellOption
+        }
+    }
+
     private fun startObservingSettings() {
         viewModelScope.launch {
             combine(
                 _trailStopPrice,
                 _stopLossPercent,
-                trailStopEnabled
-            ) { price, percent, state ->
-                Triple(
+                trailStopEnabled,
+                sellOption
+            ) { price, percent, trailState, sellOption ->
+                StockSettingsObserveModel(
                     price,
                     percent,
-                    state
+                    trailState,
+                    sellOption
                 )
-            }.collectLatest { (price, percent, state) ->
-                _stock?.let {
-                    if (price != it.takeProfitPrice || percent != it.stopLossPercent || state != it.isTrailStopEnabledByUser)
-                        stocksRepository.updateStockSettings(
-                            it.figi,
-                            price,
-                            percent,
-                            state
-                        )
+            }.collectLatest { observe ->
+                _stock?.let { stock ->
+                    //if (observe.activationPrice != stock.takeProfitPrice || observe.stopLossPercent != stock.stopLossPercent || observe.isTrailStopEnabled != stock.isTrailStopEnabledByUser || observe.sellOption != stock.sellOption)
+                    stocksRepository.updateStockSettings(
+                        stock.figi,
+                        observe.activationPrice,
+                        observe.stopLossPercent,
+                        observe.isTrailStopEnabled,
+                        observe.sellOption
+                    )
                 }
             }
         }
     }
-
 }

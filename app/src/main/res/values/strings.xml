@@ -12,4 +12,6 @@
     <string name="stop_loss_text">Stop loss %:</string>
     <string name="enable_trail_stop_text">Enable trail stop?</string>
     <string name="logout">Logout</string>
+    <string name="close_position_by">Close position by:</string>
+    <string name="stock_logo">Stock logo</string>
 </resources>

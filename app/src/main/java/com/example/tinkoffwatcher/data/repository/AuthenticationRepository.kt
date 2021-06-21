@@ -1,7 +1,7 @@
-package com.example.tinkoffwatcher.data
+package com.example.tinkoffwatcher.data.repository
 
-import com.example.tinkoffwatcher.network.AuthenticationApi
-import com.example.tinkoffwatcher.utils.DataStore
+import com.example.tinkoffwatcher.data.LoginModel
+import com.example.tinkoffwatcher.data.network.AuthenticationApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

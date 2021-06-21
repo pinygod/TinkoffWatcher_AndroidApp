@@ -1,25 +1,22 @@
-package com.example.tinkoffwatcher.network
+package com.example.tinkoffwatcher.data.network
 
 import android.annotation.SuppressLint
-import android.util.Log
-import com.example.tinkoffwatcher.BuildConfig
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
 import javax.security.cert.CertificateException
 
 fun provideOkHttpClient(authHeaderInterceptor: AuthorizationHeaderInterceptor) =
-    if (BuildConfig.BUILD_TYPE == "debug") {
+    /*if (BuildConfig.BUILD_TYPE == "debug") {
         Log.d("WARNING", "The app will use unsafe OkHttpClient")
         getUnsafeOkHttpClient()?.addInterceptor(authHeaderInterceptor)
             ?.addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
             ?.build()
-    } else {
+    } else {*/
         OkHttpClient.Builder().addInterceptor(authHeaderInterceptor)
             .build()
-    }
+    //}
 
 fun getUnsafeOkHttpClient(): OkHttpClient.Builder? {
     return try {

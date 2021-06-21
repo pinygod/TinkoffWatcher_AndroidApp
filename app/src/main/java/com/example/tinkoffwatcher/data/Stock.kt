@@ -18,5 +18,7 @@ data class Stock(
     val maxPrice: Double,
     val stopLossPercent: Double,
     val takeProfitPrice: Double,
-    val ticker: String
+    val ticker: String,
+    val sellOption: SellOption,
+    val positionType: PositionType
 ) : Parcelable

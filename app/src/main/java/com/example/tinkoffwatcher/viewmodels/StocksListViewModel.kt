@@ -2,7 +2,7 @@ package com.example.tinkoffwatcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tinkoffwatcher.data.StocksRepository
+import com.example.tinkoffwatcher.data.repository.StocksRepository
 import com.example.tinkoffwatcher.utils.DataStore
 import com.example.tinkoffwatcher.utils.Event
 import com.example.tinkoffwatcher.utils.StocksEvent

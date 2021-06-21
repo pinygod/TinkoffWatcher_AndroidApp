@@ -1,6 +1,10 @@
-package com.example.tinkoffwatcher.data
+package com.example.tinkoffwatcher.data.repository
 
-import com.example.tinkoffwatcher.network.StocksApi
+import com.example.tinkoffwatcher.data.InstrumentType
+import com.example.tinkoffwatcher.data.SellOption
+import com.example.tinkoffwatcher.data.Stock
+import com.example.tinkoffwatcher.data.StockEditSettingsModel
+import com.example.tinkoffwatcher.data.network.StocksApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
@@ -45,7 +49,13 @@ class StocksRepository(private val stocksApi: StocksApi) {
         stocksApi.editStockSettings(StockEditSettingsModel(figi = figi, stopLossPercent = percent))
     }
 
-    suspend fun updateStockSettings(figi: String, price: Double, percent: Double, state: Boolean){
-        stocksApi.editStockSettings(StockEditSettingsModel(figi = figi, takeProfitPrice = price, stopLossPercent = percent,isTrailStopEnabledByUser = state))
+    suspend fun updateStockSettings(
+        figi: String,
+        price: Double,
+        percent: Double,
+        state: Boolean,
+        sellOption: SellOption
+    ){
+        stocksApi.editStockSettings(StockEditSettingsModel(figi = figi, takeProfitPrice = price, stopLossPercent = percent,isTrailStopEnabledByUser = state, sellOption = sellOption.value))
     }
 }

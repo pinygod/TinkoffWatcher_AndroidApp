@@ -1,4 +1,4 @@
-package com.example.tinkoffwatcher.network
+package com.example.tinkoffwatcher.data.network
 
 import androidx.lifecycle.asLiveData
 import com.example.tinkoffwatcher.utils.DataStore

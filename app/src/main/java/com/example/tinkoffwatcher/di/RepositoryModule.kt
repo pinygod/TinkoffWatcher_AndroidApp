@@ -1,7 +1,7 @@
 package com.example.tinkoffwatcher.di
 
-import com.example.tinkoffwatcher.data.AuthenticationRepository
-import com.example.tinkoffwatcher.data.StocksRepository
+import com.example.tinkoffwatcher.data.repository.AuthenticationRepository
+import com.example.tinkoffwatcher.data.repository.StocksRepository
 import org.koin.dsl.module
 
 val repositoryModule = module {
