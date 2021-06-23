@@ -1,6 +1,6 @@
 package com.example.tinkoffwatcher.utils
 
-import com.example.tinkoffwatcher.data.Stock
+import com.example.tinkoffwatcher.data.PositionSettings
 
 sealed class Event {
     object Empty : Event()
@@ -14,8 +14,8 @@ sealed class LoginEvent : Event() {
     data class ShowMessage(val text: String) : Event()
 }
 
-sealed class StocksEvent : Event() {
+sealed class PositionsEvent : Event() {
     object NavigateToLogin: Event()
-    data class Loaded(val stocks: List<Stock>) : Event()
+    data class Loaded(val positions: List<PositionSettings>) : Event()
     data class ShowMessage(val text: String) : Event()
 }

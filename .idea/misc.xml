@@ -5,8 +5,12 @@
       <map>
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/activity_stocks.xml" value="0.21875" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/fragment_position_settings.xml" value="0.21875" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/fragment_positions_list.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/fragment_register.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/fragment_stock_settings.xml" value="0.33" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/fragment_stocks_list.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/position_recycler_item.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/TinkoffWatcher/app/src/main/res/layout/stock_recycler_item.xml" value="0.38697916666666665" />
       </map>
     </option>

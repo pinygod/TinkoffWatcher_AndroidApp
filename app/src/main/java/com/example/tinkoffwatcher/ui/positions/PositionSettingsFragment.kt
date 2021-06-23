@@ -1,27 +1,27 @@
-package com.example.tinkoffwatcher.ui.stocks
+package com.example.tinkoffwatcher.ui.positions
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tinkoffwatcher.data.Stock
-import com.example.tinkoffwatcher.databinding.FragmentStockSettingsBinding
-import com.example.tinkoffwatcher.viewmodels.StockSettingsViewModel
+import com.example.tinkoffwatcher.data.PositionSettings
+import com.example.tinkoffwatcher.databinding.FragmentPositionSettingsBinding
+import com.example.tinkoffwatcher.viewmodels.PositionSettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class StockSettingsFragment : Fragment() {
+class PositionSettingsFragment : Fragment() {
 
-    private lateinit var binding: FragmentStockSettingsBinding
-    private lateinit var stock: Stock
-    private val viewModel by viewModel<StockSettingsViewModel>()
+    private lateinit var binding: FragmentPositionSettingsBinding
+    private lateinit var position: PositionSettings
+    private val viewModel by viewModel<PositionSettingsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            stock = StockSettingsFragmentArgs.fromBundle(it).stock
-            viewModel.setStock(stock)
+            position = PositionSettingsFragmentArgs.fromBundle(it).position
+            viewModel.setPosition(position)
         }
     }
 
@@ -29,7 +29,7 @@ class StockSettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentStockSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentPositionSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -38,7 +38,7 @@ class StockSettingsFragment : Fragment() {
 
         with(binding) {
             lifecycleOwner = viewLifecycleOwner
-            stock = this@StockSettingsFragment.stock
+            position = this@PositionSettingsFragment.position
             viewmodel = viewModel
         }
     }

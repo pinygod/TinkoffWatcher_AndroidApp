@@ -7,7 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.tinkoffwatcher.ui.login.LoginActivity
-import com.example.tinkoffwatcher.ui.stocks.StocksActivity
+import com.example.tinkoffwatcher.ui.positions.PositionsActivity
 import com.example.tinkoffwatcher.viewmodels.SplashViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun NavigateToMainScreen() {
-        startActivity(Intent(this, StocksActivity::class.java))
+        startActivity(Intent(this, PositionsActivity::class.java))
         finish()
     }
 

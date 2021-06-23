@@ -2,28 +2,28 @@ package com.example.tinkoffwatcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tinkoffwatcher.data.SellOption
-import com.example.tinkoffwatcher.data.Stock
-import com.example.tinkoffwatcher.data.StockSettingsObserveModel
-import com.example.tinkoffwatcher.data.repository.StocksRepository
+import com.example.tinkoffwatcher.data.OrderType
+import com.example.tinkoffwatcher.data.PositionSettings
+import com.example.tinkoffwatcher.data.PositionSettingsObserveModel
+import com.example.tinkoffwatcher.data.repository.PositionsRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class StockSettingsViewModel(private val stocksRepository: StocksRepository) : ViewModel() {
+class PositionSettingsViewModel(private val positionsRepository: PositionsRepository) : ViewModel() {
 
-    private var _stock: Stock? = null
+    private var _position: PositionSettings? = null
 
     private val _trailStopPrice = MutableStateFlow(0.0)
     private val _stopLossPercent = MutableStateFlow(0.0)
     val trailStopEnabled = MutableStateFlow(false)
-    val sellOption = MutableStateFlow(SellOption.Limit)
+    val orderType = MutableStateFlow(OrderType.Limit)
 
-    fun setStock(stock: Stock) {
-        trailStopEnabled.value = stock.isTrailStopEnabledByUser
-        sellOption.value = stock.sellOption
-        _trailStopPrice.value = stock.takeProfitPrice
-        _stopLossPercent.value = stock.stopLossPercent
-        _stock = stock
+    fun setPosition(position: PositionSettings) {
+        trailStopEnabled.value = position.isTrailStopEnabledByUser
+        orderType.value = position.orderType
+        _trailStopPrice.value = position.takeProfitPrice
+        _stopLossPercent.value = position.stopLossPercent
+        _position = position
 
         startObservingSettings()
     }
@@ -50,9 +50,9 @@ class StockSettingsViewModel(private val stocksRepository: StocksRepository) : V
         }
     }
 
-    fun onSellOptionChanged(sellOption: SellOption) {
-        if (sellOption != this.sellOption.value) {
-            this.sellOption.value = sellOption
+    fun onOrderTypeChanged(orderType: OrderType) {
+        if (orderType != this.orderType.value) {
+            this.orderType.value = orderType
         }
     }
 
@@ -62,23 +62,23 @@ class StockSettingsViewModel(private val stocksRepository: StocksRepository) : V
                 _trailStopPrice,
                 _stopLossPercent,
                 trailStopEnabled,
-                sellOption
-            ) { price, percent, trailState, sellOption ->
-                StockSettingsObserveModel(
+                orderType
+            ) { price, percent, trailState, orderType ->
+                PositionSettingsObserveModel(
                     price,
                     percent,
                     trailState,
-                    sellOption
+                    orderType
                 )
             }.collectLatest { observe ->
-                _stock?.let { stock ->
-                    //if (observe.activationPrice != stock.takeProfitPrice || observe.stopLossPercent != stock.stopLossPercent || observe.isTrailStopEnabled != stock.isTrailStopEnabledByUser || observe.sellOption != stock.sellOption)
-                    stocksRepository.updateStockSettings(
-                        stock.figi,
+                _position?.let { position ->
+                    //if (observe.activationPrice != position.takeProfitPrice || observe.stopLossPercent != position.stopLossPercent || observe.isTrailStopEnabled != position.isTrailStopEnabledByUser || observe.sellOption != position.sellOption)
+                    positionsRepository.updatePositionSettings(
+                        position.positionIsin,
                         observe.activationPrice,
                         observe.stopLossPercent,
                         observe.isTrailStopEnabled,
-                        observe.sellOption
+                        observe.orderType
                     )
                 }
             }

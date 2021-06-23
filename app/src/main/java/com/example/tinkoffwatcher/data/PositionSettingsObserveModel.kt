@@ -1,8 +1,8 @@
 package com.example.tinkoffwatcher.data
 
-data class StockSettingsObserveModel(
+data class PositionSettingsObserveModel(
     val activationPrice: Double,
     val stopLossPercent: Double,
     val isTrailStopEnabled: Boolean,
-    val sellOption: SellOption
+    val orderType: OrderType
 )

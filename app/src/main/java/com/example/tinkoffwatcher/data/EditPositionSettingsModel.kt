@@ -1,9 +1,9 @@
 package com.example.tinkoffwatcher.data
 
-data class StockEditSettingsModel(
-    val figi: String,
+data class EditPositionSettingsModel(
+    val isin: String,
     val isTrailStopEnabledByUser: Boolean? = null,
     val takeProfitPrice: Double? = null,
     val stopLossPercent: Double? = null,
-    val sellOption: Int? = null
+    val orderType: OrderType? = null
 )

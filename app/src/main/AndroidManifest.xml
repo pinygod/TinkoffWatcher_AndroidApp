@@ -15,7 +15,7 @@
         android:theme="@style/Theme.TinkoffWatcher"
         tools:targetApi="m"
         android:allowBackup="false">
-        <activity android:name=".ui.stocks.StocksActivity" />
+        <activity android:name=".ui.positions.PositionsActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">

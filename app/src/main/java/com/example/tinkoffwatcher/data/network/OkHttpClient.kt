@@ -2,6 +2,7 @@ package com.example.tinkoffwatcher.data.network
 
 import android.annotation.SuppressLint
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
@@ -15,6 +16,7 @@ fun provideOkHttpClient(authHeaderInterceptor: AuthorizationHeaderInterceptor) =
             ?.build()
     } else {*/
         OkHttpClient.Builder().addInterceptor(authHeaderInterceptor)
+            .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
             .build()
     //}
 

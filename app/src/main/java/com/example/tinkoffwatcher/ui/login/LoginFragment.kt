@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.tinkoffwatcher.ui.stocks.StocksActivity
+import com.example.tinkoffwatcher.ui.positions.PositionsActivity
 import com.example.tinkoffwatcher.databinding.FragmentLoginBinding
 import com.example.tinkoffwatcher.utils.LoginEvent
 import com.example.tinkoffwatcher.utils.showMessage
@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { event ->
                     when (event) {
-                        LoginEvent.NavigateToMainScreen -> NavigateToMainScreen()
+                        LoginEvent.NavigateToMainScreen -> navigateToMainScreen()
                         is LoginEvent.ShowMessage -> showMessage(binding.root, event.text)
                     }
                 }
@@ -52,8 +52,8 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun NavigateToMainScreen() {
-        activity?.startActivity(Intent(activity, StocksActivity::class.java))
+    private fun navigateToMainScreen() {
+        activity?.startActivity(Intent(activity, PositionsActivity::class.java))
         activity?.finish()
     }
 

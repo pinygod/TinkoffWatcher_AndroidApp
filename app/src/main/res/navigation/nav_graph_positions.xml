@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/positionsListFragment">
+
+    <fragment
+        android:id="@+id/positionsListFragment"
+        android:name="com.example.tinkoffwatcher.ui.positions.PositionsListFragment"
+        android:label="fragment_positions_list"
+        tools:layout="@layout/fragment_positions_list" >
+        <action
+            android:id="@+id/action_positionsListFragment_to_positionSettingsFragment"
+            app:destination="@id/positionSettingsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/positionSettingsFragment"
+        android:name="com.example.tinkoffwatcher.ui.positions.PositionSettingsFragment"
+        android:label="fragment_position_settings"
+        tools:layout="@layout/fragment_position_settings" >
+        <argument
+            android:name="position"
+            app:argType="com.example.tinkoffwatcher.data.PositionSettings" />
+    </fragment>
+</navigation>

@@ -5,21 +5,21 @@
 
     <data>
 
-        <import type="com.example.tinkoffwatcher.data.SellOption" />
+        <import type="com.example.tinkoffwatcher.data.OrderType" />
 
         <variable
-            name="stock"
-            type="com.example.tinkoffwatcher.data.Stock" />
+            name="position"
+            type="com.example.tinkoffwatcher.data.PositionSettings" />
 
         <variable
             name="viewmodel"
-            type="com.example.tinkoffwatcher.viewmodels.StockSettingsViewModel" />
+            type="com.example.tinkoffwatcher.viewmodels.PositionSettingsViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.stocks.StockSettingsFragment">
+        tools:context=".ui.positions.PositionSettingsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,13 +31,13 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginEnd="16dp"
-                android:contentDescription="@string/stock_logo"
+                android:contentDescription="@string/position_logo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:setIsin="@{stock.isin}" />
+                app:setIsin="@{position.positionIsin}" />
 
             <TextView
                 android:id="@+id/title"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito"
-                android:text="@{stock.name}"
+                android:text="@{position.position.name}"
                 android:textSize="34sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/logo"
@@ -69,6 +69,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:baselineAligned="false"
                     android:orientation="horizontal">
 
@@ -108,7 +110,7 @@
                                 android:afterTextChanged="@{text -> viewmodel.onTrailStopPriceChanged(text)}"
                                 android:fontFamily="@font/nunito"
                                 android:inputType="numberSigned|numberDecimal"
-                                android:text="@{String.valueOf(stock.takeProfitPrice)}"
+                                android:text="@{String.valueOf(position.takeProfitPrice)}"
                                 android:textAlignment="center" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
@@ -149,7 +151,7 @@
                                 android:afterTextChanged="@{text -> viewmodel.onStopLossPercentChanged(text)}"
                                 android:fontFamily="@font/nunito"
                                 android:inputType="numberSigned|numberDecimal"
-                                android:text="@{String.valueOf(stock.stopLossPercent)}"
+                                android:text="@{String.valueOf(position.stopLossPercent)}"
                                 android:textAlignment="center" />
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
@@ -191,7 +193,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/sellOptionTitle"
+                        android:id="@+id/orderTypeTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/nunito"
@@ -208,16 +210,16 @@
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="@{viewmodel.sellOption.value == SellOption.Limit.value}"
-                            android:hint="@{SellOption.Limit.toString()}"
-                            android:onClick="@{() -> viewmodel.onSellOptionChanged(SellOption.Limit)}" />
+                            android:checked="@{viewmodel.orderType == OrderType.Limit}"
+                            android:hint="@{OrderType.Limit.toString()}"
+                            android:onClick="@{() -> viewmodel.onOrderTypeChanged(OrderType.Limit)}" />
 
                         <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:checked="@{viewmodel.sellOption.value == SellOption.Market.value}"
-                            android:hint="@{SellOption.Market.toString()}"
-                            android:onClick="@{() -> viewmodel.onSellOptionChanged(SellOption.Market)}" />
+                            android:checked="@{viewmodel.orderType == OrderType.Market}"
+                            android:hint="@{OrderType.Market.toString()}"
+                            android:onClick="@{() -> viewmodel.onOrderTypeChanged(OrderType.Market)}" />
                     </RadioGroup>
                 </LinearLayout>
             </LinearLayout>

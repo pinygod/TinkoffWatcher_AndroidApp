@@ -8,7 +8,7 @@ import retrofit2.http.POST
 
 interface AuthenticationApi {
 
-    @POST("api/Authentication/login/")
+    @POST("Authentication/login/")
     @Headers("No-Authentication: true")
     suspend fun login(@Body model: LoginModel): LoginResponse
 }
