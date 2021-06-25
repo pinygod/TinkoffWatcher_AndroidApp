@@ -6,7 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
-class AuthorizationHeaderInterceptor(private val dataStore: DataStore) :
+class AuthorizationHeaderInterceptor(dataStore: DataStore) :
     Interceptor {
 
     private var token = ""

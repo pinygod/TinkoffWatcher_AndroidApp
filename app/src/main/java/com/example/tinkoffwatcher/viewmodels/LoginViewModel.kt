@@ -27,6 +27,8 @@ class LoginViewModel(
             try {
                 val token = authenticationRepository.login(username.value, password.value)
                 dataStore.updateUserToken(token)
+                dataStore.updateUsername(username.value)
+                dataStore.updatePassword(password.value)
                 _uiState.value = LoginEvent.NavigateToMainScreen
             } catch (e: Exception) {
                 _uiState.value = LoginEvent.ShowMessage("Error while signing in")

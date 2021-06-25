@@ -9,7 +9,10 @@ import com.example.tinkoffwatcher.utils.PositionsEvent
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class PositionsListViewModel(private val positionsRepository: PositionsRepository, private val dataStore: DataStore) : ViewModel() {
+class PositionsListViewModel(
+    private val positionsRepository: PositionsRepository,
+    private val dataStore: DataStore
+) : ViewModel() {
 
     private val _event: MutableStateFlow<Event> = MutableStateFlow(Event.Empty)
     val event = _event
@@ -20,7 +23,8 @@ class PositionsListViewModel(private val positionsRepository: PositionsRepositor
         viewModelScope.launch {
             searchQuery.collectLatest { query ->
                 positionsRepository.getUserPositions(query).catch {
-                    _event.value = PositionsEvent.ShowMessage("Error while loading your positions :(")
+                    _event.value =
+                        PositionsEvent.ShowMessage("Error while loading your positions :(")
                 }.collect {
                     _event.value = PositionsEvent.Loaded(it)
                 }
@@ -28,9 +32,9 @@ class PositionsListViewModel(private val positionsRepository: PositionsRepositor
         }
     }
 
-    fun onLogoutClicked(){
+    fun onLogoutClicked() {
         viewModelScope.launch {
-            dataStore.deleteUserToken()
+            dataStore.clearSavedPreferences()
             _event.value = PositionsEvent.NavigateToLogin
         }
 
