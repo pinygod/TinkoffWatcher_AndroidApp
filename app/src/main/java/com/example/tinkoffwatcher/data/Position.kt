@@ -8,7 +8,7 @@ data class Position(
     val name: String,
     val figi: String,
     val ticker: String,
-    val isin: String,
+    val isin: String?,
     val instrumentType: InstrumentType,
     val lastPrice: Double
 ) : Parcelable

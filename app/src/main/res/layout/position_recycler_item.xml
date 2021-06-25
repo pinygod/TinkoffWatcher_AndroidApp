@@ -35,7 +35,7 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:contentDescription="@string/position_logo"
-                app:setIsin="@{position.positionIsin}" />
+                app:setTinkoffPosition="@{position.position}" />
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
-            android:text="@{@string/position_count(position.balance)}"
+            android:text="@{@string/position_count((int)position.balance)}"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/positionAveragePrice"
             app:layout_constraintStart_toStartOf="@+id/positionAveragePrice" />

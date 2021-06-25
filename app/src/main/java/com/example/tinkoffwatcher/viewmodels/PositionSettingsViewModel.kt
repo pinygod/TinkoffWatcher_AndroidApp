@@ -9,7 +9,8 @@ import com.example.tinkoffwatcher.data.repository.PositionsRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class PositionSettingsViewModel(private val positionsRepository: PositionsRepository) : ViewModel() {
+class PositionSettingsViewModel(private val positionsRepository: PositionsRepository) :
+    ViewModel() {
 
     private var _position: PositionSettings? = null
 
@@ -72,9 +73,8 @@ class PositionSettingsViewModel(private val positionsRepository: PositionsReposi
                 )
             }.collectLatest { observe ->
                 _position?.let { position ->
-                    //if (observe.activationPrice != position.takeProfitPrice || observe.stopLossPercent != position.stopLossPercent || observe.isTrailStopEnabled != position.isTrailStopEnabledByUser || observe.sellOption != position.sellOption)
                     positionsRepository.updatePositionSettings(
-                        position.positionIsin,
+                        position.positionFigi,
                         observe.activationPrice,
                         observe.stopLossPercent,
                         observe.isTrailStopEnabled,

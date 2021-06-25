@@ -5,10 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class PositionSettings(
-    val positionIsin: String,
+    val positionFigi: String,
     val position: Position,
-    val balance: Int,
-    val lots: Int,
+    val balance: Double,
+    val lots: Double,
     val blocked: Int,
     val averagePositionPrice: MoneyAmount,
     val maxPrice: Double,

@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tinkoffwatcher.data.Position
 import com.example.tinkoffwatcher.data.PositionSettings
 import com.example.tinkoffwatcher.databinding.PositionRecyclerItemBinding
 

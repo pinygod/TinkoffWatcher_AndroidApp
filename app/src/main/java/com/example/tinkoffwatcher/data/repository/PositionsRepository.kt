@@ -33,25 +33,25 @@ class PositionsRepository(private val positionsApi: PositionsApi) {
     private fun checkStringsLikeness(string: String?, query: String) = if (!string.isNullOrEmpty())
         string.contains(query, ignoreCase = true) else false
 
-    suspend fun updateTrailStopPrice(isin: String, price: Double) {
-        positionsApi.editPositionSettings(EditPositionSettingsModel(isin = isin, takeProfitPrice = price))
+    suspend fun updateTrailStopPrice(figi: String, price: Double) {
+        positionsApi.editPositionSettings(EditPositionSettingsModel(figi = figi, takeProfitPrice = price))
     }
 
-    suspend fun updateTrailStopEnabled(isin: String, state: Boolean) {
-        positionsApi.editPositionSettings(EditPositionSettingsModel(isin = isin, isTrailStopEnabledByUser = state))
+    suspend fun updateTrailStopEnabled(figi: String, state: Boolean) {
+        positionsApi.editPositionSettings(EditPositionSettingsModel(figi = figi, isTrailStopEnabledByUser = state))
     }
 
-    suspend fun updateStopLossPercent(isin: String, percent: Double) {
-        positionsApi.editPositionSettings(EditPositionSettingsModel(isin = isin, stopLossPercent = percent))
+    suspend fun updateStopLossPercent(figi: String, percent: Double) {
+        positionsApi.editPositionSettings(EditPositionSettingsModel(figi = figi, stopLossPercent = percent))
     }
 
     suspend fun updatePositionSettings(
-        isin: String,
+        figi: String,
         price: Double,
         percent: Double,
         state: Boolean,
         orderType: OrderType
     ){
-        positionsApi.editPositionSettings(EditPositionSettingsModel(isin = isin, takeProfitPrice = price, stopLossPercent = percent,isTrailStopEnabledByUser = state, orderType = orderType))
+        positionsApi.editPositionSettings(EditPositionSettingsModel(figi = figi, takeProfitPrice = price, stopLossPercent = percent,isTrailStopEnabledByUser = state, orderType = orderType))
     }
 }
