@@ -2,6 +2,8 @@ package com.example.tinkoffwatcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tinkoffwatcher.NotificationService
+import com.example.tinkoffwatcher.data.repository.AuthenticationRepository
 import com.example.tinkoffwatcher.data.repository.PositionsRepository
 import com.example.tinkoffwatcher.utils.DataStore
 import com.example.tinkoffwatcher.utils.Event
@@ -11,6 +13,7 @@ import kotlinx.coroutines.launch
 
 class PositionsListViewModel(
     private val positionsRepository: PositionsRepository,
+    private val authenticationRepository: AuthenticationRepository,
     private val dataStore: DataStore
 ) : ViewModel() {
 
@@ -34,9 +37,10 @@ class PositionsListViewModel(
 
     fun onLogoutClicked() {
         viewModelScope.launch {
-            dataStore.clearSavedPreferences()
+            authenticationRepository.deleteFCMToken()
+            NotificationService.deleteFCMToken()
+            dataStore.clearSavedPreferences() // important to delete api token in local store AFTER all actions with api
             _event.value = PositionsEvent.NavigateToLogin
         }
-
     }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386256049545",
+    "project_id": "stonkswatcher-914bf",
+    "storage_bucket": "stonkswatcher-914bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386256049545:android:3e541e61081fbcb9987d58",
+        "android_client_info": {
+          "package_name": "com.example.tinkoffwatcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386256049545-vn7aiumv5ff9o3blgb91626mbjn0i1t0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmtKa-_xqGG_9hGjh9lNyVsoJufan_GWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386256049545-vn7aiumv5ff9o3blgb91626mbjn0i1t0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

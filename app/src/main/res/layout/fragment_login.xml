@@ -20,22 +20,23 @@
         tools:context=".ui.login.LoginFragment">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/usernameLayout"
+            android:id="@+id/emailLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="150dp"
             android:layout_marginEnd="16dp"
-            android:hint="@string/username"
+            android:hint="@string/e_mail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/usernameEditText"
+                android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:text="@={viewmodel.username}" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -51,7 +52,7 @@
             android:hint="@string/password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameLayout">
+            app:layout_constraintTop_toBottomOf="@+id/emailLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEditText"

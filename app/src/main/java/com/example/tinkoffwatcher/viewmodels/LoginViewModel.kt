@@ -2,6 +2,7 @@ package com.example.tinkoffwatcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tinkoffwatcher.NotificationService
 import com.example.tinkoffwatcher.data.repository.AuthenticationRepository
 import com.example.tinkoffwatcher.utils.DataStore
 import com.example.tinkoffwatcher.utils.Event
@@ -29,6 +30,7 @@ class LoginViewModel(
                 dataStore.updateUserToken(token)
                 dataStore.updateUsername(username.value)
                 dataStore.updatePassword(password.value)
+                NotificationService.generateFCMToken()
                 _uiState.value = LoginEvent.NavigateToMainScreen
             } catch (e: Exception) {
                 _uiState.value = LoginEvent.ShowMessage("Error while signing in")

@@ -13,5 +13,7 @@ class AuthenticationRepository(
         authenticationApi.login(LoginModel(username, password)).token
     }
 
+    suspend fun addFCMToken(token: String) = authenticationApi.addFCMToken(token)
 
+    suspend fun deleteFCMToken() = authenticationApi.deleteFCMToken()
 }
