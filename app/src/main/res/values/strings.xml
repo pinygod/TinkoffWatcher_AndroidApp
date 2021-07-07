@@ -1,18 +1,21 @@
 <resources>
-    <string name="app_name">TinkoffWatcher</string>
+    <string name="app_name">StonksWatcher</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="position_count">%s pcs.</string>
+    <string name="username">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="position_count">%s шт.</string>
     <string name="position_average_price">%1$s %2$s</string>
     <string name="position_price">%1$s %2$s\n(%3$.2f %%)</string>
-    <string name="trail_stop_activation_price_text">Trail stop activation price:</string>
-    <string name="stop_loss_text">Stop loss %:</string>
-    <string name="enable_trail_stop_text">Enable trail stop?</string>
-    <string name="logout">Logout</string>
-    <string name="close_position_by">Close position by:</string>
-    <string name="position_logo">Position logo</string>
+    <string name="trail_stop_activation_price_text">Цена активации trailing stop:</string>
+    <string name="stop_loss_text">Stop loss (в процентах):</string>
+    <string name="enable_trail_stop_text">Включить trailing stop?</string>
+    <string name="logout">Выйти</string>
+    <string name="close_position_by">Тип заявки при закрытии:</string>
+    <string name="position_logo">Логотип</string>
     <string name="e_mail">E-mail</string>
+    <string name="limit_order_type">Лимитная</string>
+    <string name="market_order_type">Рыночная</string>
+    <string name="search">Поиск</string>
 </resources>

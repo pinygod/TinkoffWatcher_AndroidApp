@@ -1,15 +1,14 @@
 package com.example.tinkoffwatcher.ui.positions
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.tinkoffwatcher.data.PositionSettings
 import com.example.tinkoffwatcher.databinding.FragmentPositionSettingsBinding
 import com.example.tinkoffwatcher.viewmodels.PositionSettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class PositionSettingsFragment : Fragment() {
 

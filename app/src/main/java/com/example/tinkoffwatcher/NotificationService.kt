@@ -4,7 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.example.tinkoffwatcher.data.repository.AuthenticationRepository
+import com.example.tinkoffwatcher.data.repository.NotificationsRepository
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -15,7 +15,7 @@ import org.koin.android.ext.android.inject
 
 class NotificationService : FirebaseMessagingService() {
 
-    private val authenticationRepository: AuthenticationRepository by inject()
+    private val notificationsRepository: NotificationsRepository by inject()
 
     companion object {
         const val CHANNEL_ID = "FCMChannel"
@@ -32,7 +32,7 @@ class NotificationService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         CoroutineScope(Dispatchers.IO).launch {
-            authenticationRepository.addFCMToken(token)
+            notificationsRepository.addFCMToken(token)
         }
     }
 

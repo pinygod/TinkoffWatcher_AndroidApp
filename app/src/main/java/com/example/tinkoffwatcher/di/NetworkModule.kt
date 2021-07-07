@@ -6,6 +6,7 @@ import org.koin.dsl.module
 val networkModule = module {
     factory { provideAuthenticationApi(get()) }
     factory { providePositionsApi(get()) }
+    factory { provideNotificationsApi(get()) }
     factory { provideOkHttpClient(get()) }
     single { AuthorizationHeaderInterceptor(get()) }
     single { provideRetrofit(get()) }

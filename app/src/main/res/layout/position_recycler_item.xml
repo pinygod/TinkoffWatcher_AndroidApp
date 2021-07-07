@@ -37,8 +37,8 @@
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:contentDescription="@string/position_logo"
                 app:setTinkoffPosition="@{position.position}" />
         </androidx.cardview.widget.CardView>
@@ -49,7 +49,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/nunito"
             android:text="@{position.position.name}"
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
             android:text="@{@string/position_count((int)position.balance)}"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toTopOf="@+id/positionAveragePrice"
             app:layout_constraintStart_toStartOf="@+id/positionAveragePrice" />
 
@@ -80,6 +80,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/nunito"
             android:text="@{@string/position_price(position.position.lastPrice, position.averagePositionPrice.currency.toString(), (position.position.lastPrice / position.averagePositionPrice.Value - 1) * 100)}"
+            android:textAlignment="textEnd"
             android:textColor="@{position.position.lastPrice >= position.averagePositionPrice.value ? Color.GREEN : Color.RED}"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -95,7 +96,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/nunito"
             android:text="@{@string/position_average_price(position.averagePositionPrice.value, position.averagePositionPrice.currency.toString())}"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/logoCardView"
             app:layout_constraintStart_toEndOf="@+id/logoCardView" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,9 +12,9 @@ data class PositionSettings(
     val blocked: Int,
     val averagePositionPrice: MoneyAmount,
     val maxPrice: Double,
-    val isTrailStopEnabledByUser: Boolean,
-    val takeProfitPrice: Double,
-    val stopLossPercent: Double,
-    val positionType: PositionType,
-    val orderType: OrderType
+    val isTrailStopEnabledByUser: Boolean = false,
+    var activationPrice: Double?,
+    var stopLossPercent: Double?,
+    var orderType: OrderType?,
+    val positionType: PositionType
 ) : Parcelable

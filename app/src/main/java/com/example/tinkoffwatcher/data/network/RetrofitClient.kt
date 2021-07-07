@@ -15,3 +15,5 @@ fun provideAuthenticationApi(retrofit: Retrofit): AuthenticationApi =
     retrofit.create(AuthenticationApi::class.java)
 
 fun providePositionsApi(retrofit: Retrofit): PositionsApi = retrofit.create(PositionsApi::class.java)
+
+fun provideNotificationsApi(retrofit: Retrofit): NotificationsApi = retrofit.create(NotificationsApi::class.java)

@@ -20,10 +20,14 @@ class PositionSettingsViewModel(private val positionsRepository: PositionsReposi
     val orderType = MutableStateFlow(OrderType.Limit)
 
     fun setPosition(position: PositionSettings) {
+        position.orderType = position.orderType ?: OrderType.Market
+        position.activationPrice = position.activationPrice ?: position.averagePositionPrice.value
+        position.stopLossPercent = position.stopLossPercent ?: 2.0
+
         trailStopEnabled.value = position.isTrailStopEnabledByUser
-        orderType.value = position.orderType
-        _trailStopPrice.value = position.takeProfitPrice
-        _stopLossPercent.value = position.stopLossPercent
+        orderType.value = position.orderType!!
+        _trailStopPrice.value = position.activationPrice!!
+        _stopLossPercent.value = position.stopLossPercent!!
         _position = position
 
         startObservingSettings()
