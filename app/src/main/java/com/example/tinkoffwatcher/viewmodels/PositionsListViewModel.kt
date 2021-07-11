@@ -3,8 +3,12 @@ package com.example.tinkoffwatcher.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tinkoffwatcher.NotificationService
+import com.example.tinkoffwatcher.data.PositionSettings
+import com.example.tinkoffwatcher.data.RecyclerObject
+import com.example.tinkoffwatcher.data.RecyclerObjectType
 import com.example.tinkoffwatcher.data.repository.NotificationsRepository
 import com.example.tinkoffwatcher.data.repository.PositionsRepository
+import com.example.tinkoffwatcher.ui.adapters.PositionsListAdapter
 import com.example.tinkoffwatcher.utils.DataStore
 import com.example.tinkoffwatcher.utils.Event
 import com.example.tinkoffwatcher.utils.PositionsEvent
@@ -18,7 +22,7 @@ class PositionsListViewModel(
     private val positionsRepository: PositionsRepository,
     private val notificationsRepository: NotificationsRepository,
     private val dataStore: DataStore
-) : ViewModel() {
+) : ViewModel(), PositionsListAdapter.OnObserveChangeListener {
 
     private val _event: MutableStateFlow<Event> = MutableStateFlow(Event.Empty)
     val event = _event
@@ -32,7 +36,30 @@ class PositionsListViewModel(
                     _event.value =
                         PositionsEvent.ShowMessage("Error while loading your positions :(")
                 }.collect {
-                    _event.value = PositionsEvent.Loaded(it)
+                    val recyclerList = ArrayList<RecyclerObject>()
+
+                    val observablePositions = it.filter { position ->
+                        position.isObserveEnabled
+                    }.map { position ->
+                        RecyclerObject(RecyclerObjectType.ObservablePosition, position)
+                    }
+
+                    val nonObservablePosition = it.filter { position ->
+                        !position.isObserveEnabled
+                    }.map { position ->
+                        RecyclerObject(RecyclerObjectType.NonObservablePosition, position)
+                    }
+
+                    if (observablePositions.isNotEmpty()) {
+                        recyclerList.add(RecyclerObject(RecyclerObjectType.Title, "Отслеживаемые"))
+                        recyclerList.addAll(observablePositions)
+                    }
+                    if (nonObservablePosition.isNotEmpty()) {
+                        recyclerList.add(RecyclerObject(RecyclerObjectType.Title, "Портфель"))
+                        recyclerList.addAll(nonObservablePosition)
+                    }
+
+                    _event.value = PositionsEvent.Loaded(recyclerList)
                 }
             }
         }
@@ -44,6 +71,12 @@ class PositionsListViewModel(
             NotificationService.deleteFCMToken()
             dataStore.clearSavedPreferences() // important to delete api token in local store AFTER all actions with api
             _event.value = PositionsEvent.NavigateToLogin
+        }
+    }
+
+    override fun onObserveChange(position: PositionSettings) {
+        viewModelScope.launch {
+            positionsRepository.updatePositionSettings(position.positionFigi, !position.isObserveEnabled)
         }
     }
 }

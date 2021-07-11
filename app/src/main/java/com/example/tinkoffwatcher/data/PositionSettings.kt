@@ -13,6 +13,7 @@ data class PositionSettings(
     val averagePositionPrice: MoneyAmount,
     val maxPrice: Double,
     val isTrailStopEnabledByUser: Boolean = false,
+    val isObserveEnabled: Boolean,
     var activationPrice: Double?,
     var stopLossPercent: Double?,
     var orderType: OrderType?,

@@ -1,6 +1,7 @@
 package com.example.tinkoffwatcher.utils
 
 import com.example.tinkoffwatcher.data.PositionSettings
+import com.example.tinkoffwatcher.data.RecyclerObject
 
 sealed class Event {
     object Empty : Event()
@@ -16,6 +17,6 @@ sealed class LoginEvent : Event() {
 
 sealed class PositionsEvent : Event() {
     object NavigateToLogin: Event()
-    data class Loaded(val positions: List<PositionSettings>) : Event()
+    data class Loaded(val positions: List<RecyclerObject>) : Event()
     data class ShowMessage(val text: String) : Event()
 }

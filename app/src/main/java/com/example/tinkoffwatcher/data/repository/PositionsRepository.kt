@@ -54,4 +54,8 @@ class PositionsRepository(private val positionsApi: PositionsApi) {
     ){
         positionsApi.editPositionSettings(EditPositionSettingsModel(figi = figi, takeProfitPrice = price, stopLossPercent = percent,isTrailStopEnabledByUser = state, orderType = orderType))
     }
+
+    suspend fun updatePositionSettings(figi: String, observeState: Boolean) {
+        positionsApi.editPositionSettings(EditPositionSettingsModel(figi = figi, isObserveEnabled = observeState))
+    }
 }

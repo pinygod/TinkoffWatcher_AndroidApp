@@ -25,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PositionsListFragment : Fragment(), PositionsListAdapter.OnItemClickListener {
     private lateinit var binding: FragmentPositionsListBinding
     private val viewModel by viewModel<PositionsListViewModel>()
-    private val recyclerAdapter = PositionsListAdapter(this)
+    private lateinit var recyclerAdapter: PositionsListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +37,8 @@ class PositionsListFragment : Fragment(), PositionsListAdapter.OnItemClickListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recyclerAdapter = PositionsListAdapter(this, viewModel)
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner

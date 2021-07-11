@@ -7,24 +7,19 @@
         <import type="android.graphics.Color" />
 
         <variable
-            name="clickListener"
-            type="com.example.tinkoffwatcher.ui.adapters.PositionsListAdapter.OnItemClickListener" />
+            name="position"
+            type="com.example.tinkoffwatcher.data.PositionSettings" />
 
         <variable
             name="observeListener"
             type="com.example.tinkoffwatcher.ui.adapters.PositionsListAdapter.OnObserveChangeListener" />
-
-        <variable
-            name="position"
-            type="com.example.tinkoffwatcher.data.PositionSettings" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="@{() -> clickListener.onItemClick(position)}">
+        android:layout_marginBottom="8dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/logoCardView"
@@ -52,72 +47,37 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/nunito"
+            android:gravity="center_vertical"
             android:text="@{position.position.name}"
             android:textColor="@{position.trailStopEnabledByUser ? Color.GREEN : Color.GRAY}"
             android:textStyle="bold"
             app:autoSizeMaxTextSize="20sp"
             app:autoSizeMinTextSize="6sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintBottom_toTopOf="@+id/positionBalance"
-            app:layout_constraintEnd_toStartOf="@+id/positionPrice"
+            app:layout_constraintBottom_toBottomOf="@+id/logoCardView"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
             app:layout_constraintStart_toEndOf="@+id/logoCardView"
-            app:layout_constraintTop_toTopOf="@+id/logoCardView" />
-
-        <TextView
-            android:id="@+id/positionBalance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito"
-            android:text="@{@string/position_count((int)position.balance)}"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/positionAveragePrice"
-            app:layout_constraintStart_toStartOf="@+id/positionAveragePrice" />
-
-        <TextView
-            android:id="@+id/positionPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="3dp"
-            android:fontFamily="@font/nunito"
-            android:text="@{@string/position_price(position.position.lastPrice, position.averagePositionPrice.currency.toString(), (position.position.lastPrice / position.averagePositionPrice.Value - 1) * 100)}"
-            android:textAlignment="textEnd"
-            android:textColor="@{position.position.lastPrice >= position.averagePositionPrice.value ? Color.GREEN : Color.RED}"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/logoCardView" />
 
         <ImageButton
             android:id="@+id/imageButton"
             android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_height="42dp"
             android:layout_marginEnd="3dp"
-            android:layout_marginBottom="8dp"
             android:background="@null"
             android:clickable="@{!position.trailStopEnabledByUser}"
             android:contentDescription="@string/observe_this_position"
             android:onClick="@{() -> observeListener.onObserveChange(position)}"
             android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_eye_24"
-            app:tint="@color/colorPrimary" />
-
-        <TextView
-            android:id="@+id/positionAveragePrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/nunito"
-            android:text="@{@string/position_average_price(position.averagePositionPrice.value, position.averagePositionPrice.currency.toString())}"
-            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/logoCardView"
-            app:layout_constraintStart_toEndOf="@+id/logoCardView" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/logoCardView"
+            app:srcCompat="@drawable/ic_eye_24"
+            app:tint="@android:color/darker_gray" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

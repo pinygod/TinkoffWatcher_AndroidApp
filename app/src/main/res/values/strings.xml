@@ -18,4 +18,5 @@
     <string name="limit_order_type">Лимитная</string>
     <string name="market_order_type">Рыночная</string>
     <string name="search">Поиск</string>
+    <string name="observe_this_position">Observe this position</string>
 </resources>
