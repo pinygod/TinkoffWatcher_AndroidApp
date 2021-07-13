@@ -36,33 +36,38 @@ class PositionsListViewModel(
                     _event.value =
                         PositionsEvent.ShowMessage("Error while loading your positions :(")
                 }.collect {
-                    val recyclerList = ArrayList<RecyclerObject>()
-
-                    val observablePositions = it.filter { position ->
-                        position.isObserveEnabled
-                    }.map { position ->
-                        RecyclerObject(RecyclerObjectType.ObservablePosition, position)
-                    }
-
-                    val nonObservablePosition = it.filter { position ->
-                        !position.isObserveEnabled
-                    }.map { position ->
-                        RecyclerObject(RecyclerObjectType.NonObservablePosition, position)
-                    }
-
-                    if (observablePositions.isNotEmpty()) {
-                        recyclerList.add(RecyclerObject(RecyclerObjectType.Title, "Отслеживаемые"))
-                        recyclerList.addAll(observablePositions)
-                    }
-                    if (nonObservablePosition.isNotEmpty()) {
-                        recyclerList.add(RecyclerObject(RecyclerObjectType.Title, "Портфель"))
-                        recyclerList.addAll(nonObservablePosition)
-                    }
-
+                    val recyclerList = processPositionsListToRecyclerObjects(it)
                     _event.value = PositionsEvent.Loaded(recyclerList)
                 }
             }
         }
+    }
+
+    private fun processPositionsListToRecyclerObjects(list: List<PositionSettings>): List<RecyclerObject> {
+        val recyclerList = ArrayList<RecyclerObject>()
+
+        val observablePositions = list.filter { position ->
+            position.isObserveEnabled
+        }.map { position ->
+            RecyclerObject(RecyclerObjectType.ObservablePosition, position)
+        }
+
+        val nonObservablePosition = list.filter { position ->
+            !position.isObserveEnabled
+        }.map { position ->
+            RecyclerObject(RecyclerObjectType.NonObservablePosition, position)
+        }
+
+        if (observablePositions.isNotEmpty()) {
+            recyclerList.add(RecyclerObject(RecyclerObjectType.Title, "Отслеживаемые"))
+            recyclerList.addAll(observablePositions)
+        }
+        if (nonObservablePosition.isNotEmpty()) {
+            recyclerList.add(RecyclerObject(RecyclerObjectType.Title, "Портфель"))
+            recyclerList.addAll(nonObservablePosition)
+        }
+
+        return recyclerList
     }
 
     fun onLogoutClicked() {
@@ -76,7 +81,18 @@ class PositionsListViewModel(
 
     override fun onObserveChange(position: PositionSettings) {
         viewModelScope.launch {
-            positionsRepository.updatePositionSettings(position.positionFigi, !position.isObserveEnabled)
+            positionsRepository.updatePositionSettings(
+                position.positionFigi,
+                !position.isObserveEnabled
+            )
+            if (_event.value is PositionsEvent.Loaded) {
+                val currentList = (_event.value as PositionsEvent.Loaded).positions.filter { it.type != RecyclerObjectType.Title }.map { it.item as PositionSettings }
+                val pos = currentList.find { it == position }
+                pos?.isObserveEnabled = !position.isObserveEnabled
+
+                val recyclerList = processPositionsListToRecyclerObjects(currentList)
+                _event.value = PositionsEvent.Loaded(recyclerList)
+            }
         }
     }
 }
