@@ -48,12 +48,16 @@ class PositionsListViewModel(
 
         val observablePositions = list.filter { position ->
             position.isObserveEnabled
+        }.sortedBy { position ->
+            position.position.name
         }.map { position ->
             RecyclerObject(RecyclerObjectType.ObservablePosition, position)
         }
 
         val nonObservablePosition = list.filter { position ->
             !position.isObserveEnabled
+        }.sortedBy { position ->
+            position.position.name
         }.map { position ->
             RecyclerObject(RecyclerObjectType.NonObservablePosition, position)
         }
@@ -85,14 +89,17 @@ class PositionsListViewModel(
                 position.positionFigi,
                 !position.isObserveEnabled
             )
-            if (_event.value is PositionsEvent.Loaded) {
-                val currentList = (_event.value as PositionsEvent.Loaded).positions.filter { it.type != RecyclerObjectType.Title }.map { it.item as PositionSettings }
-                val pos = currentList.find { it == position }
-                pos?.isObserveEnabled = !position.isObserveEnabled
+        }
+        if (_event.value is PositionsEvent.Loaded) {
+            val currentList =
+                (_event.value as PositionsEvent.Loaded).positions.filter { it.type != RecyclerObjectType.Title }
+                    .map { it.item as PositionSettings }
 
-                val recyclerList = processPositionsListToRecyclerObjects(currentList)
-                _event.value = PositionsEvent.Loaded(recyclerList)
-            }
+            val pos = currentList.find { it == position }
+            pos?.isObserveEnabled = !position.isObserveEnabled
+            val recyclerList = processPositionsListToRecyclerObjects(currentList)
+
+            _event.value = PositionsEvent.Loaded(recyclerList)
         }
     }
 }
