@@ -33,7 +33,7 @@ class LoginViewModel(
                 NotificationService.generateFCMToken()
                 _uiState.value = LoginEvent.NavigateToMainScreen
             } catch (e: Exception) {
-                _uiState.value = LoginEvent.ShowMessage("Error while signing in")
+                _uiState.value = LoginEvent.ShowMessage("Авторизация не выполнена.")
             } finally {
                 _uiState.value = Event.Empty
             }

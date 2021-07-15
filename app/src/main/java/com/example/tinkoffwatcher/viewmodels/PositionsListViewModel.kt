@@ -34,7 +34,7 @@ class PositionsListViewModel(
             searchQuery.collectLatest { query ->
                 positionsRepository.getUserPositions(query).catch {
                     _event.value =
-                        PositionsEvent.ShowMessage("Error while loading your positions :(")
+                        PositionsEvent.ShowMessage("Ошибка при загрузке позиций :(")
                 }.collect {
                     val recyclerList = processPositionsListToRecyclerObjects(it)
                     _event.value = PositionsEvent.Loaded(recyclerList)
